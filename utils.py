@@ -1,7 +1,6 @@
 import csv
 import sys
-from datetime import date
-from PyQt5.QtWidgets import QCalendarWidget, QLineEdit, QFileDialog, QApplication, QWidget, QPushButton, QVBoxLayout, QLabel
+from PyQt5.QtWidgets import QCalendarWidget, QFileDialog, QApplication, QWidget, QPushButton, QGridLayout, QLabel
 from PyQt5.QtCore import QDate
 
 def read_csv(path):
@@ -60,10 +59,10 @@ def write_weeks(filename: str, dir_name: str) -> None:
             lst.append(row)
     
     weeks = []
-    past_day = date(int(lst[0][0][:4]), int(lst[0][0][5:7]), int(lst[0][0][8:]))
+    past_day = QDate(int(lst[0][0][:4]), int(lst[0][0][5:7]), int(lst[0][0][8:]))
     for row in lst[1:]:
-        day = date(int(row[0][:4]), int(row[0][5:7]), int(row[0][8:]))
-        if (day.weekday() < past_day.weekday()):
+        day = QDate(int(row[0][:4]), int(row[0][5:7]), int(row[0][8:]))
+        if (day.dayOfWeek() < past_day.dayOfWeek()):
             weeks.append(row)
             past_day = day 
         else:
@@ -73,7 +72,7 @@ def write_weeks(filename: str, dir_name: str) -> None:
             weeks = [row]
             past_day = day
 
-def get_value(day_date: date, path: str) -> float:
+def get_value(day_date: QDate, path: str) -> float:
     try:
         with open(path) as file:
             reader = csv.reader(file, delimiter = ";")

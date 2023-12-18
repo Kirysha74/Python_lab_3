@@ -1,6 +1,3 @@
-import csv
-import sys
-from PyQt5.QtWidgets import QCalendarWidget, QLineEdit, QFileDialog, QApplication, QWidget, QPushButton, QGridLayout, QLabel
 from utils import *
 
 
@@ -10,10 +7,7 @@ class MyApp(QWidget):
         self.initUI()
         self.lst = read_csv(self.filepath[0])
     def initUI(self):
-        try:
-            self.filepath = QFileDialog.getOpenFileName(self, 'Select file with dataset', filter = "*.csv")
-        except:
-            print(self.filepath)
+        self.filepath = QFileDialog.getOpenFileName(self, 'Select file with dataset', filter = "*.csv")
 
         self.setWindowTitle('Графическая оболочка')
         self.setGeometry(800, 800, 800, 600)

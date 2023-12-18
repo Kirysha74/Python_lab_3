@@ -5,11 +5,10 @@ class MyApp(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
-        self.lst = read_csv(self.filepath[0])
     def initUI(self):
-        self.filepath = QFileDialog.getOpenFileName(self, 'Select file with dataset', filter = "*.csv")
+        self.filepath = QFileDialog.getOpenFileName(self, 'Выберите исходный датасет', filter = "*.csv")
 
-        self.setWindowTitle('Графическая оболочка')
+        self.setWindowTitle('Приложение')
         self.setGeometry(800, 800, 800, 600)
 
         self.select_new_dataset = QPushButton('Загрузить новый датасет', self)
@@ -49,7 +48,7 @@ class MyApp(QWidget):
         self.setLayout(vbox)
 
     def select_new_dataset_clicked(self):
-        self.filepath = QFileDialog.getOpenFileName(self, 'Select file with dataset')
+        self.filepath = QFileDialog.getOpenFileName(self, 'Выберите новый датасет')
         
     def get_value_clicked(self):
         self.date = self.calendar.selectedDate()
@@ -61,19 +60,19 @@ class MyApp(QWidget):
         self.label1.setText(self.date.toString())
 
     def save_dataset_clicked(self):
-        self.folderpath = QFileDialog.getExistingDirectory(self, 'Select Folder')
+        self.folderpath = QFileDialog.getExistingDirectory(self, 'Выберите папку для сохранения файлов')
         save_dataset(self.filepath[0], self.folderpath)
 
     def split_by_years_clicked(self):
-        self.folderpath = QFileDialog.getExistingDirectory(self, 'Select Folder')
+        self.folderpath = QFileDialog.getExistingDirectory(self, 'Выберите папку для сохранения файлов')
         write_years(self.filepath[0], self.folderpath)
 
     def split_by_weeks_clicked(self):
-        self.folderpath = QFileDialog.getExistingDirectory(self, 'Select Folder')
+        self.folderpath = QFileDialog.getExistingDirectory(self, 'Выберите папку для сохранения файлов')
         write_weeks(self.filepath[0], self.folderpath)
 
     def split_by_columns_clicked(self):
-        self.folderpath = QFileDialog.getExistingDirectory(self, 'Select Folder')
+        self.folderpath = QFileDialog.getExistingDirectory(self, 'Выберите папку для сохранения файлов')
         write_csv_columns(self.filepath[0], self.folderpath, ["X", "Y"])
 
         
